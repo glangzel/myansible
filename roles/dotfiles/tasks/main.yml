@@ -9,7 +9,7 @@
 
 - name: Deploy dotfiles using GNU Stow
   become: no
-  command: "stow -t /home/{{ user_name }}/ --dir={{ lookup('env', 'PWD') }}/dotfiles -S {{ item }}"
+  command: "stow -t /home/{{ user_name }}/ --dir={{ playbook_dir }}/dotfiles -S {{ item }}"
   loop:
     - bash
     - i3
