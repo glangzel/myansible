@@ -1,15 +1,28 @@
 ---
 # roles/dotfiles/tasks/main.yml
-- name: Ensure .config directory exists
-  become: no
+- name: 競合する既存のデフォルトファイルを削除
+
+  file:
+    path: "/home/{{ user_name }}/{{ item }}"
+    state: absent
+  loop:
+    - .bashrc
+    - .bash_logout
+
+    - .profile
+
+- name: .config ディレクトリの作成
+
   file:
     path: "/home/{{ user_name }}/.config"
     state: directory
+    owner: "{{ user_name }}"
     mode: '0755'
 
-- name: Deploy dotfiles using GNU Stow
-  become: no
-  command: "stow -t /home/{{ user_name }}/ --dir={{ playbook_dir }}/dotfiles -S {{ item }}"
+- name: GNU Stowで設定ファイルを展開
+  become: yes
+  become_user: "{{ user_name }}"  # 一般ユーザー権限で実行してリンクの所有者を正しく保つ
+  command: "stow -v -R -t /home/{{ user_name }}/ --dir={{ playbook_dir }}/dotfiles {{ item }}"
   loop:
     - bash
     - i3
@@ -19,4 +32,4 @@
     - alacritty
     - nvim
   register: stow_result
-  changed_when: "'LINK: ' in stow_result.stdout"
+  changed_when: "'LINK' in stow_result.stdout"
