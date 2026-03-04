@@ -7,6 +7,7 @@
       - curl
       - wget
       - build-essential
-      - gnu-stow
+      - clang
+      - stow
     state: present
     update_cache: yes
