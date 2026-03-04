@@ -12,11 +12,10 @@
 - name: Flush handlers to apply netplan config
   meta: flush_handlers
 
-- name: Add handler to apply netplan
-  module_defaults:
-    ansible.builtin.command:
-      cmd: netplan apply
+- block:
+    - name: Netplan設定を適用 (Apply)
+      command: netplan apply
   rescue:
-    - name: Netplan apply failed, trying with netplan generate
+    - name: Applyに失敗したため、Generateを試行
       command: netplan generate
       failed_when: false
