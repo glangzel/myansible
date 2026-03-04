@@ -6,13 +6,17 @@
     path: "/home/{{ user_name }}/{{ item }}"
     state: absent
   loop:
-    - .bashrc
-    - .bash_logout
-
-    - .profile
+      - .bashrc
+      - .bash_logout
+      - .profile
+      - .tmux.conf
+      - .config/i3
+      - .config/polybar
+      - .config/rofi
+      - .config/alacritty
+      - .config/nvim
 
 - name: .config ディレクトリの作成
-
   file:
     path: "/home/{{ user_name }}/.config"
     state: directory
@@ -33,3 +37,10 @@
     - nvim
   register: stow_result
   changed_when: "'LINK' in stow_result.stdout"
+
+- name: 最終的な所有権を一般ユーザーに再帰的に適用
+  file:
+    path: "/home/{{ user_name }}/"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    recurse: yes
