@@ -1,0 +1,13 @@
+---
+- name: Setup Ubuntu 24.04 Lightweight Dev Environment
+  hosts: localhost
+  connection: local
+  become: true
+
+  roles:
+    - common
+    - netplan
+    - drivers
+    - desktop
+    - japanese
+    - dotfiles

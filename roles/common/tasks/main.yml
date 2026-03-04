@@ -1,0 +1,12 @@
+---
+# roles/common/tasks/main.yml
+- name: Install common packages
+  apt:
+    name:
+      - git
+      - curl
+      - wget
+      - build-essential
+      - gnu-stow
+    state: present
+    update_cache: yes

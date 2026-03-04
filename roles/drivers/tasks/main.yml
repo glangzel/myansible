@@ -1,0 +1,14 @@
+---
+# roles/drivers/tasks/main.yml
+- name: Install hardware/driver related packages
+  apt:
+    name:
+      - tlp
+      - brightnessctl
+    state: present
+
+- name: Enable and start TLP service
+  systemd:
+    name: tlp
+    enabled: yes
+    state: started

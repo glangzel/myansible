@@ -1,0 +1,68 @@
+configuration {
+    modi: "run,window,system,combi";
+    font: "JetBrains Mono 12";
+    show-icons: false;
+    terminal: "kitty"; /* お使いのターミナルに合わせて変更 */
+}
+
+
+@theme "/dev/null"
+
+* {
+    bg: #282828;
+    fg: #ebdbb2;
+    accent: #d79921; /* オレンジゴールド */
+    
+    background-color: @bg;
+    text-color: @fg;
+}
+
+window {
+    width: 40%;
+    border: 1px;
+
+    border-color: #3c3836;
+    padding: 10;
+}
+
+entry {
+    placeholder: "run:";
+    padding: 5;
+}
+
+
+listview {
+    lines: 8;
+    scrollbar: false;
+    padding: 5;
+}
+
+
+element {
+    padding: 5;
+}
+
+element selected {
+
+    background-color: @accent;
+    text-color: @bg;
+}
+
+
+/* 下部のモード切り替え表示 */
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+
+    padding: 5;
+    background-color: #3c3836;
+    text-color: @fg;
+}
+
+
+button selected {
+    background-color: @accent;
+    text-color: @bg;
+}
