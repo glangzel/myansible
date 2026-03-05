@@ -15,11 +15,6 @@
       - automake
       - libtool
       - pkg-config
-      - liblightdm-gobject-1-dev
-      - libwebkit2gtk-4.0-dev
-      - libgtk-3-dev
-      - libdbus-glib-1-dev
-      - git
     state: present
     update_cache: yes
 
