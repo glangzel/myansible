@@ -20,6 +20,14 @@ client.focused_inactive $bg     $bg     $gray   $bg       $bg
 client.unfocused        $bg     $bg     $gray   $bg       $bg
 client.urgent           $red    $red    $bg     $red      $red
 
+# 新しく開くウィンドウのボーダー設定 (タイトルバーなし、枠線のみ)
+# pixel 2 の 2 は枠線の太さです。0 にすると完全に枠も消えます。
+default_border pixel 2
+default_floating_border pixel 2
+
+# 既に開いているウィンドウに対しても適用するための汎用設定
+for_window [class=".*"] border pixel 2
+
 # 隙間 (Gaps) の設定
 
 gaps inner 10
@@ -33,4 +41,4 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 exec_always --no-startup-id picom -f
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # 壁紙設定 (画像に合わせて暗めのものを用意してください)
-exec_always --no-startup-id feh --bg-fill /path/to/your/wallpaper.jpg
+# exec_always --no-startup-id feh --bg-fill /path/to/your/wallpaper.jpg

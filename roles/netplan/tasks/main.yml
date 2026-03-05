@@ -19,3 +19,13 @@
     - name: Applyに失敗したため、Generateを試行
       command: netplan generate
       failed_when: false
+
+
+- name: Mask wait-online services to speed up boot
+  systemd:
+    name: "{{ item }}"
+    masked: yes
+  loop:
+    - systemd-networkd-wait-online.service
+    - NetworkManager-wait-online.service
+

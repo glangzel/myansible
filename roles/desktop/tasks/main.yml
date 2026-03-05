@@ -7,12 +7,24 @@
       - polybar
       - rofi
       - lightdm
-      - lightdm-gtk-greeter
+      - lightdm-webkit2-greeter
       - picom
       - feh
       - xorg
+      - alacritty
     state: present
     update_cache: yes
+
+- name: Set Alacritty as default terminal
+  alternatives:
+    name: x-terminal-emulator
+    path: /usr/bin/alacritty
+
+- name: Install dmg_blue theme for lightdm-webkit2-greeter
+  git:
+    repo: https://github.com/davidmogar/lightdm-webkit2-dmg_blue.git
+    dest: /usr/share/lightdm-webkit/themes/dmg_blue
+    depth: 1
 
 - name: Copy LightDM configuration
   copy:

@@ -4,10 +4,16 @@
   apt:
     name:
       - git
+      - tmux
+      - neovim
       - curl
       - wget
       - build-essential
       - clang
       - stow
+      - htop
+      - evince
+      - mupdf
+      - thunar
     state: present
     update_cache: yes
