@@ -35,7 +35,6 @@
     mode: '0644'
   loop:
     - { src: 'lightdm.conf', dest: '/etc/lightdm/lightdm.conf' }
-    - { src: 'lightdm-gtk-greeter.conf', dest: '/etc/lightdm/lightdm-gtk-greeter.conf' }
   notify: Restart LightDM
 
 - name: Set default graphical target
