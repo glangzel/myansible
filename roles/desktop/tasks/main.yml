@@ -1,19 +1,46 @@
 ---
 # roles/desktop/tasks/main.yml
-- name: Install core desktop packages
+- name: Install core desktop packages and build dependencies
   apt:
     name:
       - i3-wm
       - polybar
       - rofi
       - lightdm
-      - lightdm-webkit2-greeter
       - picom
       - feh
       - xorg
       - alacritty
+      - autoconf
+      - automake
+      - libtool
+      - pkg-config
+      - liblightdm-gobject-1-dev
+      - libwebkit2gtk-4.0-dev
+      - libgtk-3-dev
+      - libdbus-glib-1-dev
+      - git
     state: present
     update_cache: yes
+
+- name: Build and install lightdm-webkit2-greeter from source
+  block:
+    - name: Clone lightdm-webkit2-greeter source
+      git:
+        repo: https://github.com/Antergos/lightdm-webkit2-greeter.git
+        dest: /tmp/lightdm-webkit2-greeter
+        version: master
+        recursive: yes
+
+    - name: Build and install
+      shell: |
+        ./autogen.sh --prefix=/usr
+        make
+        make install
+      args:
+        chdir: /tmp/lightdm-webkit2-greeter
+        creates: /usr/sbin/lightdm-webkit2-greeter
+  become: yes
 
 - name: Set Alacritty as default terminal
   alternatives:
