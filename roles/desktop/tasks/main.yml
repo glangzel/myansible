@@ -15,38 +15,16 @@
       - automake
       - libtool
       - pkg-config
+      - evince
+      - mupdf
+      - thunar
     state: present
     update_cache: yes
-
-- name: Build and install lightdm-webkit2-greeter from source
-  block:
-    - name: Clone lightdm-webkit2-greeter source
-      git:
-        repo: https://github.com/Antergos/lightdm-webkit2-greeter.git
-        dest: /tmp/lightdm-webkit2-greeter
-        version: master
-        recursive: yes
-
-    - name: Build and install
-      shell: |
-        ./autogen.sh --prefix=/usr
-        make
-        make install
-      args:
-        chdir: /tmp/lightdm-webkit2-greeter
-        creates: /usr/sbin/lightdm-webkit2-greeter
-  become: yes
 
 - name: Set Alacritty as default terminal
   alternatives:
     name: x-terminal-emulator
     path: /usr/bin/alacritty
-
-- name: Install dmg_blue theme for lightdm-webkit2-greeter
-  git:
-    repo: https://github.com/davidmogar/lightdm-webkit2-dmg_blue.git
-    dest: /usr/share/lightdm-webkit/themes/dmg_blue
-    depth: 1
 
 - name: Copy LightDM configuration
   copy:
@@ -57,7 +35,7 @@
     mode: '0644'
   loop:
     - { src: 'lightdm.conf', dest: '/etc/lightdm/lightdm.conf' }
-    - { src: 'lightdm-webkit2-greeter.conf', dest: '/etc/lightdm/lightdm-webkit2-greeter.conf' }
+    - { src: 'lightdm-gtk-greeter.conf', dest: '/etc/lightdm/lightdm-gtk-greeter.conf' }
   notify: Restart LightDM
 
 - name: Set default graphical target
