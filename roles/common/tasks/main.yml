@@ -12,6 +12,7 @@
       - wget
       - build-essential
       - clang
+      - unzip
       - stow
       - htop
       - evince
