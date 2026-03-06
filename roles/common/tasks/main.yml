@@ -14,5 +14,9 @@
       - clang
       - stow
       - htop
+      - evince
+      - mupdf
+      - thunar
+      - network-manager
     state: present
     update_cache: yes
