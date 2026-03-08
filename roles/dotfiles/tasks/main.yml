@@ -22,14 +22,6 @@
     owner: "{{ user_name }}"
     mode: '0755'
 
-- name: Install LazyVim starter
-  become: yes
-  become_user: "{{ user_name }}"
-  git:
-    repo: https://github.com/LazyVim/starter
-    dest: "/home/{{ user_name }}/.config/nvim"
-    depth: 1
-
 - name: Install nvim-lspconfig as a native package
   become: yes
   become_user: "{{ user_name }}"
