@@ -7,12 +7,10 @@
       - tmux
       - fzf
       - ripgrep
-      - neovim
       - curl
       - wget
       - build-essential
       - clang
-      - unzip
       - stow
       - htop
       - evince
@@ -21,3 +19,25 @@
       - network-manager
     state: present
     update_cache: yes
+
+- name: Install latest Neovim from GitHub binary
+  block:
+    - name: Download Neovim binary
+      get_url:
+        url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+        dest: /tmp/nvim-linux-x86_64.tar.gz
+        mode: '0644'
+
+    - name: Extract Neovim to /opt
+      unarchive:
+        src: /tmp/nvim-linux-x86_64.tar.gz
+        dest: /opt
+        remote_src: yes
+        creates: /opt/nvim-linux64
+
+    - name: Create symlink to /usr/local/bin/nvim
+      file:
+        src: /opt/nvim-linux64/bin/nvim
+        dest: /usr/local/bin/nvim
+        state: link
+  become: yes
