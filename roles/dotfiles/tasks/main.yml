@@ -46,7 +46,7 @@
 
 - name: Change ownership of user dir recursively
   file:
-    path: /home/n-komata
+    path: /home/n-komata/.config
     owner: n-komata
     group: n-komata
     state: directory
