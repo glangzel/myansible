@@ -36,10 +36,19 @@
         remote_src: yes
         creates: /opt/nvim-linux64
 
+    - name: Ensure /opt/nvim-linux64 has read and execute permissions recursively
+      file:
+        path: /opt/nvim-linux64
+        state: directory
+        mode: "a+rX"
+        recurse: yes
+
     - name: Create symlink to /usr/local/bin/nvim
       file:
         src: /opt/nvim-linux64/bin/nvim
-        dest: /usr/bin/nvim
+        dest: /usr/local/bin/nvim
         state: link
+        force: yes
+
         force: yes
   become: yes
