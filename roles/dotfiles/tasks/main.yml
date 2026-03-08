@@ -1,7 +1,6 @@
 ---
 # roles/dotfiles/tasks/main.yml
 - name: 競合する既存のデフォルトファイルを削除
-
   file:
     path: "/home/{{ user_name }}/{{ item }}"
     state: absent
@@ -23,9 +22,25 @@
     owner: "{{ user_name }}"
     mode: '0755'
 
+- name: Install LazyVim starter
+  become: yes
+  become_user: "{{ user_name }}"
+  git:
+    repo: https://github.com/LazyVim/starter
+    dest: "/home/{{ user_name }}/.config/nvim"
+    depth: 1
+
+- name: Install nvim-lspconfig as a native package
+  become: yes
+  become_user: "{{ user_name }}"
+  git:
+    repo: https://github.com/neovim/nvim-lspconfig
+    dest: "/home/{{ user_name }}/.config/nvim/pack/nvim/start/nvim-lspconfig"
+    depth: 1
+
 - name: GNU Stowで設定ファイルを展開
   become: yes
-  become_user: "{{ user_name }}"  # 一般ユーザー権限で実行してリンクの所有者を正しく保つ
+  become_user: "{{ user_name }}"
   command: "stow -v -R -t /home/{{ user_name }}/ --dir={{ playbook_dir }}/dotfiles {{ item }}"
   loop:
     - bash
@@ -34,6 +49,5 @@
     - rofi
     - tmux
     - alacritty
-    - nvim
   register: stow_result
   changed_when: "'LINK' in stow_result.stdout"

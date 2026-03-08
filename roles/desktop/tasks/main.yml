@@ -19,6 +19,7 @@
       - evince
       - mupdf
       - thunar
+      - firefox
     state: present
     update_cache: yes
 
