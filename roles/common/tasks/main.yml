@@ -11,6 +11,7 @@
       - wget
       - build-essential
       - clang
+      - unzip
       - stow
       - htop
       - evince
@@ -38,6 +39,7 @@
     - name: Create symlink to /usr/local/bin/nvim
       file:
         src: /opt/nvim-linux64/bin/nvim
-        dest: /usr/local/bin/nvim
+        dest: /usr/bin/nvim
         state: link
+        force: yes
   become: yes
