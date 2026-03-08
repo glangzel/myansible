@@ -11,6 +11,7 @@
       - wget
       - build-essential
       - clang
+      - clangd
       - unzip
       - stow
       - htop
@@ -34,21 +35,28 @@
         src: /tmp/nvim-linux-x86_64.tar.gz
         dest: /opt
         remote_src: yes
-        creates: /opt/nvim-linux64
+        creates: /opt/nvim-linux-x86_64
 
-    - name: Ensure /opt/nvim-linux64 has read and execute permissions recursively
+    - name: Ensure /opt/nvim-linux-x86_64 has read and execute permissions recursively
       file:
-        path: /opt/nvim-linux64
+        path: /opt
         state: directory
         mode: "a+rX"
         recurse: yes
 
     - name: Create symlink to /usr/local/bin/nvim
       file:
-        src: /opt/nvim-linux64/bin/nvim
+        src: /opt/nvim-linux-x86_64/bin/nvim
         dest: /usr/local/bin/nvim
         state: link
         force: yes
+    
+    - name: Ensure /usr/local has read and execute permissions recursively
+      file:
+        path: /usr/local
+        state: directory
+        mode: "a+rX"
+        recurse: yes
 
         force: yes
   become: yes

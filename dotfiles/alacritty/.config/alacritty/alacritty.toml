@@ -37,19 +37,19 @@ program = "/usr/bin/bash -ic /usr/bin/tmux"
 size = 11
 
 [font.normal]
-family = "Moralerspace Argon HWNF"
+family = "Moralerspace Argon HW"
 style = "Regular"
 
 [font.bold]
-family = "Moralerspace Argon HWNF"
+family = "Moralerspace Argon HW"
 style = "Bold"
 
 [font.italic]
-family = "Moralerspace Argon HWNF"
+family = "Moralerspace Argon HW"
 style = "Italic"
 
 [font.bold_italic]
-family = "Moralerspace Argon HWNF"
+family = "Moralerspace Argon HW"
 style = "Bold Italic"
 
 

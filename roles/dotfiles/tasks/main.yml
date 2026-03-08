@@ -43,3 +43,11 @@
     - alacritty
   register: stow_result
   changed_when: "'LINK' in stow_result.stdout"
+
+- name: Change ownership of user dir recursively
+  file:
+    path: /home/n-komata
+    owner: n-komata
+    group: n-komata
+    state: directory
+    recurse: yes
