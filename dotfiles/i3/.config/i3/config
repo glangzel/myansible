@@ -20,14 +20,6 @@ set $aqua #689d6a
 set $gray #a89984
 
 
-# ウィンドウの色設定
-# class                 border  backgr. text    indicator child_border
-client.focused          $yellow $yellow $bg     $purple   $yellow
-client.focused_inactive $bg     $bg     $gray   $bg       $bg
-client.unfocused        $bg     $bg     $gray   $bg       $bg
-client.urgent           $red    $red    $bg     $red      $red
-
-
 ## Bar!
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -61,11 +53,12 @@ exec --no-startup-id dunst
 set $mod Mod4
 
 ## Disable titlebars
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1 
 
 #### THIS BLOCK WORKS ONLY WITH `i3-gaps-next` ##
-gaps inner 0
-smart_gaps 1
+gaps inner 4
+gaps outer 4
+# smart_gaps on 
 bindsym $mod+minus gaps inner all minus 1
 bindsym $mod+equal gaps inner all plus 1
 #################################################
@@ -251,6 +244,14 @@ bindsym $mod+r mode "resize"
 #        position top
 #        strip_workspace_numbers yes
 #}
+
+# ウィンドウの色設定
+# class                 border  backgr. text    indicator child_border
+client.focused          $yellow $yellow $bg     $purple   $yellow
+client.focused_inactive $bg     $bg     $gray   $bg       $bg
+client.unfocused        $bg     $bg     $gray   $bg       $bg
+client.urgent           $red    $red    $bg     $red      $red
+
 
 # class                 border  backgr. text    indicator
 #client.focused          #3c3836 #32302f #fabd2f #fabd2f

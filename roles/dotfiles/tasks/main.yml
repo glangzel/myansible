@@ -1,53 +1,41 @@
 ---
 # roles/dotfiles/tasks/main.yml
+
 - name: 競合する既存のデフォルトファイルを削除
   file:
-    path: "/home/{{ user_name }}/{{ item }}"
+    path: "{{ dotfiles_home }}/{{ item }}"
     state: absent
-  loop:
-      - .bashrc
-      - .bash_logout
-      - .profile
-      - .tmux.conf
-      - .config/i3
-      - .config/polybar
-      - .config/rofi
-      - .config/alacritty
-      - .config/nvim
+  loop: "{{ dotfiles_delete_targets | default([]) }}"
 
 - name: .config ディレクトリの作成
   file:
-    path: "/home/{{ user_name }}/.config"
+    path: "{{ dotfiles_home }}/.config"
     state: directory
-    owner: "{{ user_name }}"
+    owner: "{{ dotfiles_owner | default(omit) }}"
+    group: "{{ dotfiles_group | default(omit) }}"
     mode: '0755'
 
 - name: Install nvim-lspconfig as a native package
-  become: yes
-  become_user: "{{ user_name }}"
   git:
     repo: https://github.com/neovim/nvim-lspconfig
-    dest: "/home/{{ user_name }}/.config/nvim/pack/nvim/start/nvim-lspconfig"
+    dest: "{{ dotfiles_home }}/.config/nvim/pack/nvim/start/nvim-lspconfig"
     depth: 1
+  become: "{{ dotfiles_become | default(false) }}"
+  become_user: "{{ user_name | default(omit) }}"
 
 - name: GNU Stowで設定ファイルを展開
-  become: yes
-  become_user: "{{ user_name }}"
-  command: "stow -v -R -t /home/{{ user_name }}/ --dir={{ playbook_dir }}/dotfiles {{ item }}"
-  loop:
-    - bash
-    - i3
-    - polybar
-    - rofi
-    - tmux
-    - alacritty
+  command: "stow -v -R -t {{ dotfiles_home }}/ --dir={{ playbook_dir }}/dotfiles {{ item }}"
+  loop: "{{ stow_targets }}"
   register: stow_result
   changed_when: "'LINK' in stow_result.stdout"
+  become: "{{ dotfiles_become | default(false) }}"
+  become_user: "{{ user_name | default(omit) }}"
 
 - name: Change ownership of user dir recursively
   file:
-    path: /home/n-komata/.config
-    owner: n-komata
-    group: n-komata
+    path: "{{ dotfiles_home }}/.config"
+    owner: "{{ dotfiles_owner | default(omit) }}"
+    group: "{{ dotfiles_group | default(omit) }}"
     state: directory
     recurse: yes
+  when: dotfiles_owner is defined

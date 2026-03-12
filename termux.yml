@@ -1,0 +1,23 @@
+---
+- name: Setup Termux Environment
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars:
+    dotfiles_home: "{{ ansible_env.HOME }}"
+    user_name: "{{ ansible_user_id }}"
+    dotfiles_become: false
+    stow_targets:
+      - bash
+      - tmux
+      - nvim
+    dotfiles_delete_targets:
+      - .bashrc
+      - .bash_logout
+      - .profile
+      - .tmux.conf
+      - .config/nvim
+
+  roles:
+    - termux
+    - dotfiles

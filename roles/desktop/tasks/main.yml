@@ -8,6 +8,7 @@
       - rofi
       - lightdm
       - lightdm-gtk-greeter
+      - lightdm-gtk-greeter-settings
       - picom
       - feh
       - xorg
@@ -20,6 +21,8 @@
       - mupdf
       - thunar
       - firefox
+      - light-locker
+      - xss-lock
     state: present
     update_cache: yes
 
@@ -37,6 +40,7 @@
     mode: '0644'
   loop:
     - { src: 'lightdm.conf', dest: '/etc/lightdm/lightdm.conf' }
+    - { src: 'lightdm-gtk-greeter.conf', dest: '/etc/lightdm/lightdm-gtk-greeter.conf' }
   notify: Restart LightDM
 
 - name: Set default graphical target

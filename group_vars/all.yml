@@ -1,3 +1,29 @@
 ---
 # group_vars/all.yml
 user_name: n-komata
+dotfiles_home: "/home/{{ user_name }}"
+dotfiles_become: true
+dotfiles_owner: "{{ user_name }}"
+dotfiles_group: "{{ user_name }}"
+stow_targets:
+  - bash
+  - i3
+  - polybar
+  - rofi
+  - tmux
+  - alacritty
+  - nvim
+  - fcitx5
+  - xprofile
+dotfiles_delete_targets:
+  - .bashrc
+  - .bash_logout
+  - .profile
+  - .tmux.conf
+  - .config/i3
+  - .config/polybar
+  - .config/rofi
+  - .config/alacritty
+  - .config/nvim
+  - .config/fcitx5
+  - .xprofile

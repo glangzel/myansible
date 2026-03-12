@@ -28,7 +28,7 @@ opacity = 0.95
 
 
 
-[terminal.shell]
+[shell]
 program = "/usr/bin/bash -ic /usr/bin/tmux"
 
 

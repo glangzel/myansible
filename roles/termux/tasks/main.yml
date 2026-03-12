@@ -1,0 +1,27 @@
+---
+# roles/termux/tasks/main.yml
+- name: Update pkg cache
+  command: pkg update -y
+  changed_when: false
+
+- name: Install common packages for Termux
+  command: "pkg install -y {{ item }}"
+  loop:
+    - git
+    - tmux
+    - fzf
+    - ripgrep
+    - curl
+    - wget
+    - unzip
+    - stow
+    - htop
+    - neovim
+    - python
+  changed_when: false
+
+- name: Create .config directory in Termux
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+    mode: '0755'

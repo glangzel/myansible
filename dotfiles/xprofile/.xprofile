@@ -1,0 +1,21 @@
+# BEGIN ANSIBLE MANAGED BLOCK FOR Fcitx5
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export DefaultIMModule=fcitx5
+fcitx5 -d > /dev/null 2>&1
+
+# ディスプレイ設定
+# (エラーで止まらないよう、各コマンドの末尾に & をつけるか、そのまま並べます)
+xrandr --newmode "1920x1080_60.00" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+xrandr --addmode VGA-1 "1920x1080_60.00"
+xrandr --output VGA-1 --mode "1920x1080_60.00"
+# END ANSIBLE MANAGED BLOCK FOR Fcitx5
+
+light-locker &
+
+xss-lock --transfer-sleep-lock -- light-locker-command --lock &
+
+# キーボード設定
+setxkbmap jp
+
