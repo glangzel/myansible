@@ -24,6 +24,8 @@
       - light-locker
       - xss-lock
       - pulseaudio
+      - pulseaudio-utils
+      - brightnessctl
     state: present
     update_cache: yes
 

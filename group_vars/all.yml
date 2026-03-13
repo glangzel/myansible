@@ -16,6 +16,7 @@ stow_targets:
   - nvim
   - fcitx5
   - xprofile
+  - dunst
 dotfiles_delete_targets:
   - .bashrc
   - .bash_profile
@@ -29,3 +30,4 @@ dotfiles_delete_targets:
   - .config/nvim
   - .config/fcitx5
   - .xprofile
+  - .config/dunst
