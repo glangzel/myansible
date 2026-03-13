@@ -38,7 +38,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-fill ~/Pictures/new-shinobu-v1.png
 
 ## Language switch bind (Caps Lock + led)
-exec --no-startup-id setxkbmap -layout us,ru -option grp:caps_toggle,grp_led:caps -variant winkeys
+exec --no-startup-id setxkbmap -layout jp -option grp:caps_toggle,grp_led:caps -variant winkeys
 
 ## Notifications daemon
 exec --no-startup-id dunst
