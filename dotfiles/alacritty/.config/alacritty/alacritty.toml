@@ -29,7 +29,8 @@ opacity = 0.95
 
 
 [shell]
-program = "/usr/bin/bash -ic /usr/bin/tmux"
+program = "/usr/bin/bash"
+args = ["--login", "-ic", "/usr/bin/tmux"]
 
 
 

@@ -23,6 +23,7 @@
       - firefox
       - light-locker
       - xss-lock
+      - pulseaudio
     state: present
     update_cache: yes
 
