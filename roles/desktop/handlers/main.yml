@@ -1,5 +1,0 @@
----
-- name: Restart LightDM
-  service:
-    name: lightdm
-    state: restarted
